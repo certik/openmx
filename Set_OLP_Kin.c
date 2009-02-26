@@ -925,7 +925,7 @@ double Set_OLP_Kin(double *****OLP, double *****H0)
                   
                   /* add a small vaule for stabilization of eigenvalue routine */
 
-                  OLP[0][Mc_AN][h_AN][num0+L0+M0][num1+L1+M1] = 8.0*CsumS0.r + 0.0*rnd(1.0e-17);
+                  OLP[0][Mc_AN][h_AN][num0+L0+M0][num1+L1+M1] = 8.0*CsumS0.r + rnd(1.0e-17);
 		  H0[0][Mc_AN][h_AN][num0+L0+M0][num1+L1+M1] = 4.0*CsumK0.r;
 
                   if (h_AN!=0){

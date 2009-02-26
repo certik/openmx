@@ -402,7 +402,7 @@ double Set_Aden_Grid(int init_density)
 
     Gc_AN = F_M2G[Mc_AN];
     Cwan = WhatSpecies[Gc_AN];
-    Nele = InitN_USpin[Gc_AN] + InitN_DSpin[Gc_AN];
+    Nele = fabs(InitN_USpin[Gc_AN] + InitN_DSpin[Gc_AN]);
     Nu = InitN_USpin[Gc_AN];
     Nd = InitN_DSpin[Gc_AN];
 
@@ -534,8 +534,15 @@ double Set_Aden_Grid(int init_density)
     Nele = InitN_USpin[Gc_AN] + InitN_DSpin[Gc_AN];
     Nu = InitN_USpin[Gc_AN];
     Nd = InitN_DSpin[Gc_AN];
-    ocupcy_u = Nu/Nele;
-    ocupcy_d = Nd/Nele;
+
+    if (1.0e-13<Nele){
+      ocupcy_u = Nu/Nele;
+      ocupcy_d = Nd/Nele;
+    }
+    else{
+      ocupcy_u = 0.0;
+      ocupcy_d = 0.0;
+    }
 
     /* spin collinear */
     if ( init_density==1 && SpinP_switch==1 ){

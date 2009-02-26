@@ -614,15 +614,20 @@ void Read_VPS(int spe, char *file)
 
   if (remake_headfile==0){
 
-    sum = 0.0;
-    dx = Spe_PAO_XV[spe][1] - Spe_PAO_XV[spe][0];
-    for (i=0; i<Spe_Num_Mesh_PAO[spe]; i++){
-      sum += Spe_Atomic_Den[spe][i]*exp(3.0*Spe_PAO_XV[spe][i]);
-    }
-    sum *= 4.0*PI*dx; 
+    /* except for the empty atom */ 
+    if (Spe_WhatAtom[spe]!=0){
 
-    for (i=0; i<Spe_Num_Mesh_PAO[spe]; i++){
-      Spe_Atomic_Den[spe][i] *= (Spe_Core_Charge[spe]/sum);
+      sum = 0.0;
+      dx = Spe_PAO_XV[spe][1] - Spe_PAO_XV[spe][0];
+      for (i=0; i<Spe_Num_Mesh_PAO[spe]; i++){
+	sum += Spe_Atomic_Den[spe][i]*exp(3.0*Spe_PAO_XV[spe][i]);
+      }
+      sum *= 4.0*PI*dx; 
+
+      for (i=0; i<Spe_Num_Mesh_PAO[spe]; i++){
+	Spe_Atomic_Den[spe][i] *= (Spe_Core_Charge[spe]/sum);
+      }
+
     }
   }
 
@@ -1279,6 +1284,9 @@ double V_Hart_atom(int spe, double R)
   int i;
   double xmin,xmax,Sx,Dx,x,rp,dx;
   double Inside,Outside,result;
+
+  /* empty atom */ 
+  if (Spe_WhatAtom[spe]==0) return 0.0;
   
   /****************************************************
               contribution from the inside
