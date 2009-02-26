@@ -108,8 +108,8 @@
 #
 
 
-CC      = gcc -O3 -Dnompi -Dnoomp -I/usr/local/include -I/home/ozaki/include
-LIB     = -L/usr/local/lib -lfftw3 -llapack -lblas -lg2c -static
+CC      = gcc -O3 -Dnompi -Dnoomp
+LIB     = -lfftw3 -llapack -lblas -lgfortran
 
 
 CFLAGS  = -g 
@@ -560,7 +560,7 @@ Show_DFT_DATA.o: Show_DFT_DATA.c openmx_common.h Inputtools.h
 
 install:	$(PROG)
 	strip $(PROG)
-	cp $(PROG) $(DESTDIR)/$(PROG)
+	cp $(PROG) $(DESTDIR)/usr/bin/$(PROG)
 
 #
 #
