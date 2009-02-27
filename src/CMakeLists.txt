@@ -195,6 +195,9 @@ set(SRC
 )
 
 add_definitions(-Dnompi -Dnoomp)
+find_package(FFTW3 REQUIRED)
+include_directories(${FFTW3_INCLUDE})
+link_directories(${FFTW3_LIB})
 
 add_executable(openmx ${SRC})
 # This seems to work everywhere and in Sage:
