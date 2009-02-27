@@ -199,4 +199,7 @@ set(SRC
     RecursionS_H.c
 )
 
+add_definitions(-Dnompi -Dnoomp)
+
 add_executable(openmx ${SRC})
+target_link_libraries(openmx fftw3 lapack blas gfortran)
