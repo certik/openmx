@@ -197,7 +197,10 @@ set(SRC
 add_definitions(-Dnompi -Dnoomp)
 
 add_executable(openmx ${SRC})
-target_link_libraries(openmx fftw3 lapack blas gfortran)
+# This seems to work everywhere and in Sage:
+target_link_libraries(openmx fftw3 lapack cblas f77blas atlas)
+# This works for me in Ubuntu/Debian, but not in Sage:
+#target_link_libraries(openmx fftw3 lapack blas gfortran)
 
 install(TARGETS openmx
     RUNTIME DESTINATION bin)
