@@ -198,3 +198,6 @@ add_definitions(-Dnompi -Dnoomp)
 
 add_executable(openmx ${SRC})
 target_link_libraries(openmx fftw3 lapack blas gfortran)
+
+install(TARGETS openmx
+    RUNTIME DESTINATION bin)
